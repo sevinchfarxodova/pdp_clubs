@@ -5,7 +5,7 @@ import 'package:pdp_clubs/constants/colors.dart';
 class HomePage extends StatelessWidget {
   final List<Map<String, String>> whys = [
     {
-      "image": "assets/images/b.svg",
+      "image": "assets/images/buildng.png",
       "name": "PDP University",
       "description": "Bu ko’plab IT kompaniyalarni o’z"
           "    ichiga oluvchi PDP Valley ekotizimini "
@@ -134,12 +134,13 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 220,
+                height: 300,
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
+                   childAspectRatio: 1,
                   ),
                   itemCount: whys.length,
                   itemBuilder: (context, index) {
