@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-
 import '../../../../constants/colors.dart';
+
 class Button extends StatelessWidget {
   String? text;
   final VoidCallback onPressed;
-  Button({super.key, required this.text, required this.onPressed,});
+
+  Button({
+    super.key,
+    required this.text,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +18,12 @@ class Button extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.blue,
-          padding:  EdgeInsets.symmetric(horizontal: 100, vertical: 22),
+          padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
           ),
         ),
-        child:  Row(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
@@ -32,6 +37,5 @@ class Button extends StatelessWidget {
         ),
       ),
     );
-
   }
 }

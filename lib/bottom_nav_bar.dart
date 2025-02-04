@@ -14,7 +14,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
   List<Widget> pages = [
      HomePage(),
-    const ClubsPage(),
+     ClubsPage(),
      HomePage(),
   ];
 
@@ -36,7 +36,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
         onTap: (int newIndex) {
           setState(() {
             if (newIndex == 1) {
-              // Reload ClubsPage when tapped
               pages[1] = const ClubsPage();
             }
             _currentIndex = newIndex;
@@ -44,7 +43,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         },
         items: [
           bottomNavigationBarWidget(
-            "assets/images/for_splash.png",
+            "assets/images/img.png",
             "Home",
           ),
           bottomNavigationBarWidget(

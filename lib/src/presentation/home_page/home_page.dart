@@ -1,40 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdp_clubs/constants/colors.dart';
+import '../../data/dummy_data.dart';
 
 class HomePage extends StatelessWidget {
-  final List<Map<String, String>> whys = [
-    {
-      "image": "assets/images/buildng.png",
-      "name": "PDP University",
-      "description": "Bu ko’plab IT kompaniyalarni o’z"
-          "    ichiga oluvchi PDP Valley ekotizimini "
-          "    barpo etishdagi navbatdagi qadam.",
-    },
-    {
-      "image": "assets/images/star.png",
-      "name": "Imkoniyat",
-      "description": "Talabalar boshlang'ich \$300-700"
-          " maosh bilan ishga joylashish "
-          "imkoniyatiga ega bo’ladi.",
-    },
-    {
-      "image": "assets/images/pearson.png",
-      "name": "Pearson, BTEC",
-      "description":"Barcha o’quv qo’llanmalarimiz "
-          "Buyuk Britaniyaning Pearson BTEC xalqaro"
-          " ta’lim dasturi standartlariga asoslangan.",
-    },
-    {
-      "image": "assets/images/money.png",
-      "name": "Katta maosh",
-      "description": "Bitiruvchilar kamida "
-          "\$1000 boshlang’ich maoshli mutaxassisdan,"
-          " IT Startup  asoschisi imkoniyatlarga ega",
-    },
-  ];
-
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +21,9 @@ class HomePage extends StatelessWidget {
           style: TextStyle(color: AppColors.blue),
         ),
         centerTitle: true,
+        actions: [
+          Icon(Icons.menu_outlined),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -63,7 +36,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Container(
                     width: 200,
-                   height: 265,
+                    height: 265,
                     child: Image.asset("assets/images/director_photo.jpg",
                         fit: BoxFit.cover),
                   ),
@@ -87,10 +60,10 @@ class HomePage extends StatelessWidget {
                           width: double.infinity,
                           child: Text(
                             "If thousands of Uzbek youth around the world are paid not for manual labor, but for their high intellect,"
-                                "and if millions of young people improve the financial situation of their families,"
-                                "help their loved ones who are struggling abroad return to their homeland,"
-                                "and if we can train specialists who make decisions that change the world "
-                                " leadership.",
+                            "and if millions of young people improve the financial situation of their families,"
+                            "help their loved ones who are struggling abroad return to their homeland,"
+                            "and if we can train specialists who make decisions that change the world "
+                            " leadership.",
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.black,
@@ -140,7 +113,7 @@ class HomePage extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
-                   childAspectRatio: 1,
+                    childAspectRatio: 1,
                   ),
                   itemCount: whys.length,
                   itemBuilder: (context, index) {
@@ -160,16 +133,18 @@ class HomePage extends StatelessWidget {
                           Text(
                             whys[index]["name"]!,
                             style: TextStyle(
-                              color: AppColors.blue,
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                color: AppColors.blue,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               whys[index]["description"]!,
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 14,
-                              color: AppColors.black),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: AppColors.black),
                             ),
                           ),
                         ],
