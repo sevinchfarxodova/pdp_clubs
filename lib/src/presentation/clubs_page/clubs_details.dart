@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ClubDetailsPage extends StatelessWidget {
   final Map<String, String> club;
-  const ClubDetailsPage({required this.club, Key? key}) : super(key: key);
+  const ClubDetailsPage({required this.club, super.key});
 
   @override
   Widget build(BuildContext context) {

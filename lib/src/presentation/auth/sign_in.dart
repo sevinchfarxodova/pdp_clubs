@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pdp_clubs/src/presentation/auth/widgets/button.dart';
+import 'package:pdp_clubs/src/presentation/auth/widgets/text_fields.dart';
 
 import '../../../constants/colors.dart';
-
-
 
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -12,54 +11,56 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-     body: Padding(
-        padding: EdgeInsets.only(left: 20, right: 20),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           ///asdfaj
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 26,
             ),
-            Text(
+            const Text(
               'Sign In',
               style: TextStyle(
                   color: AppColors.black,
                   fontSize: 34,
                   fontWeight: FontWeight.w600),
             ),
-            SizedBox(
+            const SizedBox(
               height: 26,
             ),
-            Text(
+            const Text(
               'EMAIL',
               style: TextStyle(color: AppColors.blue, fontSize: 12),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
-            Textfields(text: 'Enter Your Email',),
-            SizedBox(
+            Textfields(
+              text: 'Enter Your Email',
+            ),
+            const SizedBox(
               height: 24,
             ),
-            Text(
+            const Text(
               'PASSWORD',
               style: TextStyle(color: AppColors.blue, fontSize: 12),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Textfields(text: 'Enter Your Password'),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Button(
-                text: 'Sign in',
-                onPressed: () {
-                  Navigator.pushNamed(context, "/bottom_nav_bar");
-                },
-                ),
+              text: 'Sign in',
+              onPressed: () {
+                Navigator.pushNamed(context, "/bottom_nav_bar");
+              },
+            ),
           ],
         ),
       ),
