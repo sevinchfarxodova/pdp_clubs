@@ -12,16 +12,16 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    Timer( Duration(seconds: 3),(){
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushNamed(context, "/sign_in");
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.white,
       body: Center(
         child: Image.asset("assets/images/for_splash.png"),

@@ -10,16 +10,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  return MaterialApp(
-    debugShowCheckedModeBanner: false,
-    //home: SplashPage(),
-    initialRoute: "/splash_page",
-    routes: {
-      "/splash_page":(context)=> SplashPage(),
-      "/sign_in":(context)=> SignIn(),
-      "/home_page":(context)=> HomePage(),
-      "/bottom_nav_bar":(context)=> BottomNavBar(),
-    },
-  );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: "/splash_page",
+      routes: {
+        "/splash_page": (context) => const SplashPage(),
+        "/sign_in": (context) => const SignIn(),
+        "/home_page": (context) => HomePage(),
+        "/bottom_nav_bar": (context) => const BottomNavBar(),
+      },
+    );
   }
 }

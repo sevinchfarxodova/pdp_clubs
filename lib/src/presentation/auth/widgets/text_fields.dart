@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
+
 
 class Textfields extends StatelessWidget {
   final String text;
