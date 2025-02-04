@@ -43,15 +43,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
         },
         items: [
           bottomNavigationBarWidget(
-            "assets/images/img.png",
+            "assets/images/bottom1.png",
             "Home",
           ),
           bottomNavigationBarWidget(
-            "assets/images/for_splash.png",
+            "assets/images/bottom2.png",
             "Clubs",
           ),
           bottomNavigationBarWidget(
-            "assets/images/for_splash.png",
+            "assets/images/bottom3.png",
             "Courses",
           ),
         ],
