@@ -5,7 +5,7 @@ import 'package:pdp_clubs/constants/colors.dart';
 class HomePage extends StatelessWidget {
   final List<Map<String, String>> whys = [
     {
-      "image": "assets/images/buildng.png",
+      "image": "assets/images/b.svg",
       "name": "PDP University",
       "description": "Bu ko’plab IT kompaniyalarni o’z"
           "    ichiga oluvchi PDP Valley ekotizimini "
@@ -133,15 +133,13 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(fontSize: 18, color: AppColors.blue),
                 ),
               ),
-              // ✅ Fixed GridView Issue: Wrapped in SizedBox
               SizedBox(
-                height: 300, // ✅ Fixed height for GridView
+                height: 220,
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // 2 items in one row
-                    crossAxisSpacing: 10, // Space between columns
-                    mainAxisSpacing: 10, // Space between rows
-                   childAspectRatio: 1, // Controls size of each grid item
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
                   ),
                   itemCount: whys.length,
                   itemBuilder: (context, index) {
@@ -154,8 +152,8 @@ class HomePage extends StatelessWidget {
                         children: [
                           Image.asset(
                             whys[index]["image"]!,
-                            width: 70,
-                            height: 70,
+                            width: 40,
+                            height: 40,
                           ),
                           SizedBox(height: 8),
                           Text(
