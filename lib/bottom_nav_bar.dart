@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pdp_clubs/features/clubs_page/clubs_page.dart';
-import 'package:pdp_clubs/features/home_page/home_page.dart';
+import 'package:pdp_clubs/src/presentation/clubs_page/clubs_page.dart';
+import 'package:pdp_clubs/src/presentation/home_page/home_page.dart';
 
 import 'constants/colors.dart';
 

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pdp_clubs/src/presentation/auth/widgets/button.dart';
+import 'package:pdp_clubs/src/presentation/auth/widgets/text_fields.dart';
 
 import '../../../constants/colors.dart';
 
