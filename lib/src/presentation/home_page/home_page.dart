@@ -3,7 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:pdp_clubs/constants/colors.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final List<Map<String, String>> whys = [
+    {
+  "image": "assets/images/director_photo.jpg",
+  "name": "PDP University",
+      "description": "Bu ko’plab IT kompaniyalarni o’z"
+  "    ichiga oluvchi PDP Valley ekotizimini "
+  "    barpo etishdagi navbatdagi qadam.",
+    },
+
+  ];
+   HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +98,18 @@ class HomePage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 8,),
+            Center(
+              child: Text("Why PDP University?",
+              style: TextStyle(
+                fontSize:18,
+                color: AppColors.blue
+              )),
+            ),
+            Row(
+              children: [
+
+              ],
+            )
           ],
         ),
       ),

@@ -14,8 +14,8 @@ class ClubDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(club["info"]!, style: TextStyle(fontSize: 16)),
-            const SizedBox(height: 20),
+            Text(club["info"]!, style: const TextStyle(fontSize: 16)),
+             SizedBox(height: 20),
           ],
         ),
       ),

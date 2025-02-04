@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pdp_clubs/src/presentation/clubs_page/widgets/clubs_list.dart';
 import 'package:pdp_clubs/src/presentation/clubs_page/widgets/dropdown.dart';
 
+import '../../../constants/colors.dart';
+
 class ClubsPage extends StatefulWidget {
   const ClubsPage({super.key});
 
@@ -124,7 +126,6 @@ class _ClubsPageState extends State<ClubsPage> {
           height: 500,
           child: ClubList(clubs: filteredClubs),
         ),
-
             ],
           ),
         ),
