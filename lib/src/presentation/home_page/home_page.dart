@@ -5,7 +5,7 @@ import 'package:pdp_clubs/constants/colors.dart';
 class HomePage extends StatelessWidget {
   final List<Map<String, String>> whys = [
     {
-  "image": "assets/images/director_photo.jpg",
+  "image": "assets/images/buildingIcon.svg",
   "name": "PDP University",
       "description": "Bu ko’plab IT kompaniyalarni o’z"
   "    ichiga oluvchi PDP Valley ekotizimini "
