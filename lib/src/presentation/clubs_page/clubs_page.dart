@@ -15,8 +15,8 @@ class ClubsPage extends StatefulWidget {
 class _ClubsPageState extends State<ClubsPage> {
   final ApiService _apiService = ApiService();
   String selectedCategory = "All";
-  List<Club> clubs = []; // Use the Club model instead of Map
-  List<Club> filteredClubs = []; // Use the Club model here as well
+  List<Club> clubs = [];
+  List<Club> filteredClubs = [];
   bool isLoading = true;
 
   @override
