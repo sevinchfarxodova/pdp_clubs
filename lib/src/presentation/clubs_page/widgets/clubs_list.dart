@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pdp_clubs/src/data/models/club_model.dart';
 
+import '../clubs_details.dart';
+
 class ClubList extends StatelessWidget {
   final List<Club> clubs;
 
   const ClubList({super.key, required this.clubs});
+
   // 000
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,13 @@ class ClubList extends StatelessWidget {
                 Text(club.type, style: const TextStyle(color: Colors.grey)),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              // Add navigation to club details page if needed
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ClubDetailsPage(club: club), // Pass a single Club
+                ),
+              );
             },
           ),
         );
