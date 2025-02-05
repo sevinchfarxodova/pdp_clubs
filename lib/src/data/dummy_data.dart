@@ -32,7 +32,7 @@ List<String> categories = [
         "imkoniyatiga ega bo’ladi.",
   },
   {
-    "image": "assets/images/pr.png",
+    "image": "assets/images/prs.png",
     "name": "Pearson, BTEC",
     "description": "Barcha o’quv qo’llanmalarimiz "
         "Buyuk Britaniyaning Pearson BTEC xalqaro"

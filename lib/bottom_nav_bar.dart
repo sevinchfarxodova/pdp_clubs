@@ -31,7 +31,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         currentIndex: _currentIndex,
         selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 15,
+          fontSize: 13,
         ),
         onTap: (int newIndex) {
           setState(() {
@@ -59,14 +59,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 
-  BottomNavigationBarItem bottomNavigationBarWidget(
-      String imageURL, String label) {
-    return BottomNavigationBarItem(
-      backgroundColor: AppColors.white,
+  BottomNavigationBarItem bottomNavigationBarWidget(String imageURL, String label) {
+      return BottomNavigationBarItem(
       label: label,
       icon: ImageIcon(
         AssetImage(imageURL),
-        size: 45,
+        size: 35,
       ),
     );
   }

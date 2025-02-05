@@ -1,107 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:pdp_clubs/src/presentation/clubs_page/widgets/clubs_controller.dart';
 import 'package:pdp_clubs/src/presentation/clubs_page/widgets/clubs_list.dart';
 import 'package:pdp_clubs/src/presentation/clubs_page/widgets/dropdown.dart';
+import 'package:pdp_clubs/src/presentation/clubs_page/widgets/search_field.dart';
 import '../../../constants/colors.dart';
-import '../../data/models/club_model.dart';
-import '../../data/my_service.dart';
+import 'package:provider/provider.dart';
 
-class ClubsPage extends StatefulWidget {
+class ClubsPage extends StatelessWidget {
   const ClubsPage({super.key});
 
   @override
-  State<ClubsPage> createState() => _ClubsPageState();
-}
-
-class _ClubsPageState extends State<ClubsPage> {
-  final ApiService _apiService = ApiService();
-  String selectedCategory = "All";
-  List<Club> clubs = [];
-  List<Club> filteredClubs = [];
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    fetchClubs();
-  }
-
-  Future<void> fetchClubs() async {
-    setState(() => isLoading = true);
-    try {
-      final fetchedClubs = await ApiService.fetchClubs(); // List<Club> expected
-      setState(() {
-        clubs = fetchedClubs;
-        filteredClubs = fetchedClubs;
-      });
-    } catch (e) {
-      print("Error fetching clubs: $e");
-    } finally {
-      setState(() => isLoading = false);
-    }
-  }
-
-  void filterClubs(String category) {
-    setState(
-      () {
-        selectedCategory = category;
-        filteredClubs = category == "All"
-            ? clubs
-            : clubs
-                .where((club) => club.type == category)
-                .toList(); // Use club.type for comparison
-      },
-    );
-  }
-
-  void searchClubs(String query) {
-    setState(
-      () {
-        filteredClubs = clubs
-            .where((club) => club.clubName.toLowerCase().contains(
-                query.toLowerCase())) // Use club.clubName for searching
-            .toList();
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Clubs", style: TextStyle(color: AppColors.black)),
-        actions: [
-          CategoryDropdown(
-            selectedCategory: selectedCategory,
-            categories: ["All", "Technology", "Art", "Games", "Music"],
-            // Categories
-            onCategoryChanged: filterClubs,
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Search clubs...",
-                prefixIcon: const Icon(Icons.search_outlined),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+    return ChangeNotifierProvider(
+      create: (_) => ClubsController(), // Provide the controller
+      child: Consumer<ClubsController>(
+        builder: (context, controller, child) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Center(
+                child: Text(
+                  "Clubs 🎭",
+                  style: TextStyle(fontSize: 20, color: AppColors.blue),
+                ),
               ),
-              onChanged: searchClubs,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: CategoryDropdown(
+                    selectedCategory: controller.selectedCategory,
+                    categories: controller.categories,
+                    onCategoryChanged: controller.filterClubs,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : Expanded(
+            body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  SearchField(onSearch: controller.searchClubs),
+                  const SizedBox(height: 16),
+                  controller.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : Expanded(
                     child: RefreshIndicator(
-                      onRefresh: fetchClubs, // Pull to refresh
-                      child: ClubList(clubs: filteredClubs),
+                      onRefresh: controller.fetchClubs,
+                      child: ClubList(clubs: controller.filteredClubs),
                     ),
                   ),
-          ],
-        ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
