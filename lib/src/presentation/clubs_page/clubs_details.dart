@@ -110,7 +110,6 @@ class _ClubDetailsPageState extends State<ClubDetailsPage> {
             SizedBox(height: 6,),
             //comments
             CommentsButton(club: widget.club,),
-
             // Show Comments
             const SizedBox(height: 8),
              Text(
