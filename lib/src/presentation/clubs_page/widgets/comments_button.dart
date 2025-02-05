@@ -1,63 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdp_clubs/src/data/models/club_model.dart';
 import '../../../../constants/colors.dart';
 import '../../../data/my_service.dart';
 
-class CommentsButton extends StatefulWidget {
+class CommentsButton extends StatelessWidget {
   final Club club;
-   CommentsButton({super.key, required this.club});
+  final VoidCallback addComment;
+  TextEditingController controller;
+  bool isSubmitting;
 
-  @override
-  State<CommentsButton> createState() => _CommentsButtonState();
-}
-
-class _CommentsButtonState extends State<CommentsButton> {
-  final TextEditingController _commentController = TextEditingController();
-  bool isSubmitting = false;
-  List<String> localComments = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchLatestComments();
-  }
-
-  Future<void> _fetchLatestComments() async {
-    try {
-      Club updatedClub = await ApiService.fetchClubDetails(widget.club.id);
-      setState(() {
-        localComments = updatedClub.comment; // Update comments in UI
-      });
-    } catch (e) {
-      print("Error fetching comments: $e");
-    }
-  }
-
-  Future<void> addComment() async {
-    if (_commentController.text.isEmpty) return;
-
-    setState(() => isSubmitting = true);
-
-    try {
-      await ApiService.addComment(widget.club.id, _commentController.text);
-
-      setState(() {
-        localComments = List.from(localComments)..add(_commentController.text); // Ensures UI updates
-      });
-
-      _commentController.clear();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Comment added successfully!")),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error adding comment: $e")),
-      );
-    } finally {
-      setState(() => isSubmitting = false);
-    }
-  }
+  CommentsButton(
+      {super.key,
+      required this.club,
+      required this.addComment,
+      required this.controller,
+      required this.isSubmitting});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +37,7 @@ class _CommentsButtonState extends State<CommentsButton> {
               ],
             ),
             child: TextField(
-              controller: _commentController,
+              controller: controller,
               decoration: InputDecoration(
                 labelText: "Write a comment...",
                 labelStyle: TextStyle(color: Colors.grey),
@@ -91,7 +48,8 @@ class _CommentsButtonState extends State<CommentsButton> {
                 ),
                 filled: true,
                 fillColor: Colors.white,
-                contentPadding: EdgeInsets.symmetric(vertical: 9, horizontal: 16),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 9, horizontal: 16),
               ),
             ),
           ),
@@ -100,17 +58,21 @@ class _CommentsButtonState extends State<CommentsButton> {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.blue,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
             elevation: 3,
           ),
           onPressed: isSubmitting ? null : addComment,
           child: isSubmitting
               ? const CircularProgressIndicator(color: Colors.white)
-              : const Text("Add Comment", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white)),
+              : const Text("Add Comment",
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white)),
         ),
       ],
     );
   }
 }
-

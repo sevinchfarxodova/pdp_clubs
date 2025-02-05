@@ -9,7 +9,6 @@ class ClubList extends StatelessWidget {
 
   const ClubList({super.key, required this.clubs});
 
-  // 000
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -29,17 +28,18 @@ class ClubList extends StatelessWidget {
               ),
             ),
             title: Text(club.clubName,
-                style: const TextStyle(
-                    fontWeight: FontWeight.w500)),
-            subtitle: Text(club.type,
-                    style:  TextStyle(
-                        color: AppColors.blue)),
+                style: const TextStyle(fontWeight: FontWeight.w500)),
+            subtitle:
+                Text(club.type, style: const TextStyle(color: AppColors.blue)),
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
-                size: 20,),
+              size: 20,
+            ),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                      ClubDetailsPage(club: club),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ClubDetailsPage(club: club),
                 ),
               );
             },

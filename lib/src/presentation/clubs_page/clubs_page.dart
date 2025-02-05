@@ -43,11 +43,11 @@ class ClubsPage extends StatelessWidget {
                   controller.isLoading
                       ? const Center(child: CircularProgressIndicator())
                       : Expanded(
-                    child: RefreshIndicator(
-                      onRefresh: controller.fetchClubs,
-                      child: ClubList(clubs: controller.filteredClubs),
-                    ),
-                  ),
+                          child: RefreshIndicator(
+                            onRefresh: controller.fetchClubs,
+                            child: ClubList(clubs: controller.filteredClubs),
+                          ),
+                        ),
                 ],
               ),
             ),

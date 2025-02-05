@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pdp_clubs/src/data/dummy_data.dart';
 import 'package:pdp_clubs/src/data/my_service.dart';
 import 'package:pdp_clubs/src/data/models/club_model.dart';
 import 'package:pdp_clubs/src/presentation/clubs_page/widgets/comments_button.dart';
@@ -15,9 +14,9 @@ class ClubDetailsPage extends StatefulWidget {
 }
 
 class _ClubDetailsPageState extends State<ClubDetailsPage> {
+  List<String> localComments = [];
   final TextEditingController _commentController = TextEditingController();
   bool isSubmitting = false;
-  List<String> localComments = [];
 
   @override
   void initState() {
@@ -29,7 +28,7 @@ class _ClubDetailsPageState extends State<ClubDetailsPage> {
     try {
       Club updatedClub = await ApiService.fetchClubDetails(widget.club.id);
       setState(() {
-        localComments = updatedClub.comment; // Update comments in UI
+        localComments = List.from(updatedClub.comment);
       });
     } catch (e) {
       print("Error fetching comments: $e");
@@ -38,20 +37,25 @@ class _ClubDetailsPageState extends State<ClubDetailsPage> {
 
   Future<void> addComment() async {
     if (_commentController.text.isEmpty) return;
+
     setState(() => isSubmitting = true);
 
     try {
       await ApiService.addComment(widget.club.id, _commentController.text);
+
       setState(() {
         localComments.add(_commentController.text);
       });
       _commentController.clear();
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Comment added successfully!")),
       );
+
+      _fetchLatestComments();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error adding comment: $e",)),
+        SnackBar(content: Text("Error adding comment: $e")),
       );
     } finally {
       setState(() => isSubmitting = false);
@@ -61,16 +65,19 @@ class _ClubDetailsPageState extends State<ClubDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.club.clubName,
-          style: TextStyle(
-            color: AppColors.blue,
-            fontSize:20,
-          )),
-        centerTitle: true,),
+      appBar: AppBar(
+        title: Text(widget.club.clubName,
+            style: const TextStyle(
+              color: AppColors.blue,
+              fontSize: 20,
+            )),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
+          spacing: 8,
           children: [
             //photo
             Center(
@@ -83,59 +90,63 @@ class _ClubDetailsPageState extends State<ClubDetailsPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
-            Text(widget.club.desc,
-                style: const TextStyle(
-                    fontSize: 16),
-              textAlign: TextAlign.justify,),
-            const SizedBox(height: 6),
-        //director,date
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text('Invited date: 8.02.2025', style: TextStyle(
-              color: Colors.grey,
-              fontWeight: FontWeight.w500,
-              fontSize: 14
-            ),),
-            Text('Director: Dilafruz Aliyeva',
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 14
-              ),
+            Text(
+              widget.club.desc,
+              style: const TextStyle(fontSize: 16),
+              textAlign: TextAlign.justify,
             ),
-          ],
-        ),
-            SizedBox(height: 6,),
-            //comments
-            CommentsButton(club: widget.club,),
+            //director,date
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Invited date: 8.02.2025',
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14),
+                ),
+                Text(
+                  'Director: Dilafruz Aliyeva',
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                ),
+              ],
+            ),
+            CommentsButton(
+              club: widget.club,
+              addComment: addComment,
+              controller: _commentController,
+              isSubmitting: isSubmitting,
+            ),
             // Show Comments
-            const SizedBox(height: 8),
-             Text(
-                "Comments:",
-                style: TextStyle(
+            const Text(
+              "Comments:",
+              style: TextStyle(
                   fontSize: 16,
                   color: AppColors.yellow,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
+                  fontWeight: FontWeight.bold),
+            ),
             Expanded(
               child: localComments.isEmpty
-                  ? const Center(child: Text("No comments yet.",
-              style: TextStyle(
-                fontSize: 12),
-              ))
+                  ? const Center(
+                      child: Text(
+                      "No comments yet.",
+                      style: TextStyle(fontSize: 12),
+                    ))
                   : ListView.builder(
                       itemCount: localComments.length,
                       itemBuilder: (context, index) {
                         return Card(
                           margin: const EdgeInsets.symmetric(vertical: 3),
                           child: ListTile(
-                            title: Text(localComments[index], style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),),
+                            title: Text(
+                              localComments[index],
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         );
                       },
@@ -149,7 +160,8 @@ class _ClubDetailsPageState extends State<ClubDetailsPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 200, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 200, vertical: 16),
                 elevation: 3,
               ),
               onPressed: () {
@@ -158,36 +170,43 @@ class _ClubDetailsPageState extends State<ClubDetailsPage> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Center(
-                        child: Text("Confirmation",
-                            style: TextStyle(fontWeight: FontWeight.bold,
-                            color: AppColors.blue,
-                            fontSize: 18),
+                        child: Text(
+                          "Confirmation",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.blue,
+                              fontSize: 18),
                         ),
                       ),
-                      content: Text("Are you sure you want to send your application?"),
+                      content: Text(
+                          "Are you sure you want to send your application?"),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text("Cancel", style: TextStyle(color: Colors.red)),
+                          child: Text("Cancel",
+                              style: TextStyle(color: Colors.red)),
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.blue,
                           ),
                           onPressed: () {
-                            Navigator.pop(context); },
-                          child: Text("Yes", style: TextStyle(color: Colors.white)),
+                            Navigator.pop(context);
+                          },
+                          child: Text("Yes",
+                              style: TextStyle(color: Colors.white)),
                         ),
                       ],
                     );
                   },
                 );
-                },
-              child: Text(
+              },
+              child: const Text(
                 "Send application",
-                style: TextStyle(fontSize: 16,
+                style: TextStyle(
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: AppColors.black),
               ),
