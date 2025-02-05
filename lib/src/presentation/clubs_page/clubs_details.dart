@@ -125,8 +125,7 @@ class _ClubDetailsPageState extends State<ClubDetailsPage> {
                   ? const Center(child: Text("No comments yet.",
               style: TextStyle(
                 fontSize: 12),
-              )
-              )
+              ))
                   : ListView.builder(
                       itemCount: localComments.length,
                       itemBuilder: (context, index) {
