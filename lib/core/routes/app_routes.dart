@@ -4,12 +4,9 @@ abstract class AppRoutesNames {
 // auth
   static const String home = '/home';
   static const String splash = '/splash';
-  static const String login = '/login';
+  static const String signIn = '/signIn';
+  static const String signUp = '/signUp';
   static const String confirm = '/confirm';
-  static const String testUser = '/test_user';
-  static const String mustPay = '/must_pay';
-  static const String ratePage = '/rate_page';
-  static const String themePage = '/theme_page';
 
   // profile
   static const String profile = '/profile';
@@ -17,15 +14,15 @@ abstract class AppRoutesNames {
   static const String history = '/history';
   static const String appTheme = '/app_theme';
 
-  //
-  static const String lesson = '/lesson';
-  static const String videoLesson = '/videoLesson';
-  static const String testPage = '/testPage';
-  static const String testsOptionPage = '/testsOptionPage';
-  static const String resultPage = '/result_page';
+  //clubs
+  static const String clubsPage = '/clubsPage';
+  static const String clubsCategory = '/clubsCategory';
+  static const String clubDetail = '/clubDetail';
+
 
   // bottom nav bar
   static const String bottomNavBar = '/bottom_nav_bar';
+  static const String homePage = '/homePage';
 
 }
 

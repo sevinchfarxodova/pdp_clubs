@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pdp_clubs/features/clubs/clubs_page_with%20_search.dart';
+import 'package:pdp_clubs/features/home/home_page.dart';
 import 'core/colors/app_colors.dart';
 import 'features/profile/pages/profile_page.dart';
 
@@ -13,8 +15,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
 
   final List<Widget> pages = [
-    Center(child: Text("Home Page")),
-    Center(child: Text("Clubs Page")),
+   HomePage(),
+    ClubsPageSearch(),
     ProfilePage(),
   ];
 
@@ -41,15 +43,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 24),
+            icon: Icon(Icons.home, size: 30),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group_rounded, size: 24),
+            icon: Icon(Icons.group_rounded, size: 30),
             label: 'Clubs',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, size: 24),
+            icon: Icon(Icons.person, size: 30),
             label: 'Profile',
           ),
         ],
